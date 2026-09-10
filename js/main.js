@@ -614,13 +614,11 @@
             </section>
             <div class="workflow-shots">
                 <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/workflow-architecture.png（系统架构图） -->
-                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
+                    <img class="workflow-shot-img" src="images/workflow-architecture.svg" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
                     <figcaption>Architecture: Feishu 👉 Hermes 👉 FastAPI 👉 CrewAI 4-core + vision plugin</figcaption>
                 </figure>
-                <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/feishu-phone.png（手机飞书遥控截图） -->
-                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="Feishu remote-control screenshot on phone">
+                <figure class="workflow-shot workflow-shot-phone">
+                    <img class="workflow-shot-img" src="images/feishu-phone.svg" alt="Feishu remote-control screenshot on phone">
                     <figcaption>Phone Feishu remote-control screenshot</figcaption>
                 </figure>
             </div>`;
@@ -662,13 +660,11 @@
             </section>
             <div class="workflow-shots">
                 <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/workflow-architecture.png（系统架构图） -->
-                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
+                    <img class="workflow-shot-img" src="images/workflow-architecture.svg" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
                     <figcaption>系统架构图：手机飞书 👉 Hermes网关 👉 FastAPI接口 👉 CrewAI 4核心角色 + 视觉外挂</figcaption>
                 </figure>
-                <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/feishu-phone.png（手机飞书遥控截图） -->
-                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="手机飞书遥控截图">
+                <figure class="workflow-shot workflow-shot-phone">
+                    <img class="workflow-shot-img" src="images/feishu-phone.svg" alt="手机飞书遥控截图">
                     <figcaption>手机飞书遥控截图</figcaption>
                 </figure>
             </div>`;
