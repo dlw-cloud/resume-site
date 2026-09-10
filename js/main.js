@@ -56,6 +56,9 @@
             viewSite: '打开网站',
             pendingDemo: '演示链接待补充',
             pendingPhotos: '相册待补充',
+            workflowCta: 'AI驾驭AI，从零搭建AI自动化工作流',
+            workflowKicker: '大一新生 · 零基础 · 一个人 = 一支 AI 团队',
+            workflowModalTitle: 'AI驾驭AI，从零搭建AI自动化工作流',
             langBtn: 'EN',
             themeLabel: '深浅',
             printLabel: '打印',
@@ -129,6 +132,9 @@
             viewSite: 'Open site',
             pendingDemo: 'Demo link pending',
             pendingPhotos: 'Photo album pending',
+            workflowCta: 'AI driving AI: building an automation workflow from zero',
+            workflowKicker: 'Freshman · zero CS background · one person, one AI crew',
+            workflowModalTitle: 'AI driving AI: building an automation workflow from zero',
             langBtn: '中',
             themeLabel: 'Theme',
             printLabel: 'Print',
@@ -232,6 +238,15 @@
             },
         ],
         projects: [
+            {
+                title: { zh: 'AI驾驭AI · 自动化工作流', en: 'AI-drives-AI workflow' },
+                role: { zh: '独立架构 / 全栈落地', en: 'Solo architect' },
+                date: { zh: '2026 年入学', en: '2026, year 1' },
+                status: 'done',
+                desc: { zh: '零基础用 Cursor 写代码、CrewAI 组团队、Hermes 做网关、GLM-4V 做眼睛。飞书发一句，电脑里的 AI 员工就开工。', en: 'From zero: Cursor for code, CrewAI for the crew, Hermes as gateway, GLM-4V as eyes. A Feishu message puts the AI staff to work.' },
+                result: { zh: '7 角色砍到极速版 4 核心；文字 + 图片遥控；任务结束自动沉淀技能卡。点下方按钮看完整图文。', en: '7 roles cut to a 4-core fast path; text + image remote control; skill cards after every job. Open the button for the full story.' },
+                tags: ['CrewAI', 'RAG', 'GLM-4V', 'FastAPI', 'Hermes'],
+            },
             {
                 title: { zh: '传感器电路设计与制作', en: 'Sensor circuit design & build' },
                 role: { zh: '团队负责人', en: 'Team lead' },
@@ -560,6 +575,122 @@
         `);
     }
 
+    function workflowModalHtml() {
+        if (lang === 'en') {
+            return `
+            <div class="workflow-badges" aria-label="stack">
+                <span>CrewAI</span><span>RAG</span><span>GLM-4V</span><span>Qwen3.8</span>
+                <span>FastAPI</span><span>Hermes</span><span>Self-evolving</span><span>Multimodal</span>
+            </div>
+            <section class="workflow-block">
+                <h4>Thesis</h4>
+                <p>Let <strong>AI write the code</strong> (Cursor), <strong>AI staff the team</strong> (CrewAI), <strong>AI run the gateway</strong> (Hermes), and <strong>AI be the eyes</strong> (GLM-4V). One freshman, the output of a whole AI crew.</p>
+            </section>
+            <section class="workflow-block">
+                <h4>Phone remote</h4>
+                <ul>
+                    <li><strong>FastAPI + Hermes</strong> bridges Feishu. Send a message from bed; agents on the PC start working.</li>
+                    <li>Text orders and <strong>image recognition</strong> both land.</li>
+                </ul>
+            </section>
+            <section class="workflow-block">
+                <h4>Fast 4-core crew</h4>
+                <p>Cut from 7 roles to a <strong>fast 4-core</strong>: manager, researcher, executor, reflector. Redundant hops gone, token cost roughly halved, latency roughly doubled in speed.</p>
+            </section>
+            <section class="workflow-block">
+                <h4>Bolt-on vision</h4>
+                <p>Executor stays light (<strong>Qwen3.8-Flash</strong>). Pictures go to <strong>GLM-4V</strong> first — see, transcribe — then back to the executor. Cheap where it can be, sharp where it must.</p>
+            </section>
+            <section class="workflow-block">
+                <h4>Self-evolving loop</h4>
+                <p>After every job the reflector writes a <strong>skill card</strong> into the RAG store. The more it runs, the less it repeats the same pit.</p>
+            </section>
+            <section class="workflow-block">
+                <h4>Always-on ops</h4>
+                <ul>
+                    <li>Boot: network check, keep-alive, FastAPI, Hermes gateway.</li>
+                    <li>Windows stay minimized. <strong>7×24</strong> on call.</li>
+                </ul>
+            </section>
+            <div class="workflow-shots">
+                <figure class="workflow-shot">
+                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/workflow-architecture.png（系统架构图） -->
+                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
+                    <figcaption>Architecture: Feishu 👉 Hermes 👉 FastAPI 👉 CrewAI 4-core + vision plugin</figcaption>
+                </figure>
+                <figure class="workflow-shot">
+                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/feishu-phone.png（手机飞书遥控截图） -->
+                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="Feishu remote-control screenshot on phone">
+                    <figcaption>Phone Feishu remote-control screenshot</figcaption>
+                </figure>
+            </div>`;
+        }
+        return `
+            <div class="workflow-badges" aria-label="技术栈">
+                <span>CrewAI</span><span>RAG</span><span>GLM-4V</span><span>Qwen3.8</span>
+                <span>FastAPI</span><span>Hermes</span><span>自我进化</span><span>多模态</span>
+            </div>
+            <section class="workflow-block">
+                <h4>理念</h4>
+                <p>用 AI 写代码（<strong>Cursor</strong>），用 AI 组团队（<strong>CrewAI</strong>），用 AI 做网关（<strong>Hermes</strong>），用 AI 做眼睛（<strong>GLM-4V</strong>）。大一新生、零基础——最终让一个人拥有一个 AI 团队的生产力。</p>
+            </section>
+            <section class="workflow-block">
+                <h4>手机远程遥控</h4>
+                <ul>
+                    <li>通过 <strong>FastAPI + Hermes</strong> 网关打通飞书。躺在床上用手机飞书发消息，电脑里的 AI 员工自动干活。</li>
+                    <li>同时支持<strong>文字指令</strong>和<strong>图片识别</strong>。</li>
+                </ul>
+            </section>
+            <section class="workflow-block">
+                <h4>极速多智能体架构</h4>
+                <p>从最初的 7 个角色精简为<strong>极速版 4 核心</strong>：项目经理、联网搜索师、执行师、复盘员。砍掉冗余环节，Token 成本腰斩，响应速度翻倍。</p>
+            </section>
+            <section class="workflow-block">
+                <h4>多模态视觉辅助（外挂眼睛）</h4>
+                <p>执行师模型保持轻量级（<strong>Qwen3.8-Flash</strong>），挂载视觉工具（<strong>GLM-4V</strong>）。接到图片时，先由视觉模型「看懂并转成文字」，再交回执行师处理——成本与效率的最优解。</p>
+            </section>
+            <section class="workflow-block">
+                <h4>自我进化闭环</h4>
+                <p>复盘员在每次任务后自动总结踩坑经验，写入 RAG 知识库生成<strong>技能卡片</strong>。系统越用越聪明。</p>
+            </section>
+            <section class="workflow-block">
+                <h4>全自动化运维</h4>
+                <ul>
+                    <li>开机自动做网络延迟检测、防休眠、启动 FastAPI 与 Hermes 网关。</li>
+                    <li>服务窗口最小化，<strong>7×24</strong> 小时稳定待命。</li>
+                </ul>
+            </section>
+            <div class="workflow-shots">
+                <figure class="workflow-shot">
+                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/workflow-architecture.png（系统架构图） -->
+                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
+                    <figcaption>系统架构图：手机飞书 👉 Hermes网关 👉 FastAPI接口 👉 CrewAI 4核心角色 + 视觉外挂</figcaption>
+                </figure>
+                <figure class="workflow-shot">
+                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成 images/feishu-phone.png（手机飞书遥控截图） -->
+                    <img class="workflow-shot-img" src="YOUR_IMAGE_URL" alt="手机飞书遥控截图">
+                    <figcaption>手机飞书遥控截图</figcaption>
+                </figure>
+            </div>`;
+    }
+
+    function bindWorkflowShotFallbacks(root) {
+        if (!root) return;
+        root.querySelectorAll('.workflow-shot-img').forEach((img) => {
+            img.addEventListener('error', function onErr() {
+                this.removeEventListener('error', onErr);
+                this.classList.add('is-empty');
+            });
+        });
+    }
+
+    function fillWorkflowModal() {
+        const body = document.getElementById('workflowModalBody');
+        if (!body) return;
+        body.innerHTML = workflowModalHtml();
+        bindWorkflowShotFallbacks(body);
+    }
+
     function renderProjects() {
         const box = document.getElementById('projectsGrid');
         box.innerHTML = resume.projects.map((p) => `
@@ -575,6 +706,7 @@
                 ${p.link ? `<a class="work-link" href="${p.link}" target="_blank" rel="noopener">${t('viewSite')}</a>` : ''}
             </article>
         `).join('');
+        fillWorkflowModal();
     }
 
     function renderWorks() {
@@ -772,12 +904,50 @@
     }
 
     const videoModal = document.getElementById('videoModal');
+    const workflowModal = document.getElementById('workflowModal');
+    const openWorkflowBtn = document.getElementById('openWorkflowBtn');
+    const closeWorkflowBtn = document.getElementById('closeWorkflowBtn');
+    let workflowLastFocus = null;
+
+    function anyMediaOpen() {
+        return (videoModal && !videoModal.hidden)
+            || (gameModal && !gameModal.hidden)
+            || (workflowModal && !workflowModal.hidden);
+    }
+
+    function openWorkflow() {
+        if (!workflowModal) return;
+        closeVideo();
+        closeGame();
+        workflowLastFocus = document.activeElement;
+        workflowModal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        if (closeWorkflowBtn) closeWorkflowBtn.focus();
+    }
+
+    function closeWorkflow() {
+        if (!workflowModal || workflowModal.hidden) return;
+        workflowModal.hidden = true;
+        if (!anyMediaOpen()) document.body.style.overflow = '';
+        if (workflowLastFocus && typeof workflowLastFocus.focus === 'function') {
+            workflowLastFocus.focus();
+        }
+    }
+
+    if (openWorkflowBtn) openWorkflowBtn.addEventListener('click', openWorkflow);
+    if (closeWorkflowBtn) closeWorkflowBtn.addEventListener('click', closeWorkflow);
+    if (workflowModal) {
+        workflowModal.addEventListener('click', (e) => {
+            if (e.target === workflowModal) closeWorkflow();
+        });
+    }
     const introVideo = document.getElementById('introVideo');
     const gameModal = document.getElementById('gameModal');
     const gameFrame = document.getElementById('gameFrame');
 
     function openVideo() {
         if (!videoModal) return;
+        closeWorkflow();
         closeGame();
         videoModal.hidden = false;
         document.body.style.overflow = 'hidden';
@@ -792,10 +962,11 @@
         if (introVideo) {
             introVideo.pause();
         }
-        if (!gameModal || gameModal.hidden) document.body.style.overflow = '';
+        if (!anyMediaOpen()) document.body.style.overflow = '';
     }
     function openGame() {
         if (!gameModal) return;
+        closeWorkflow();
         closeVideo();
         gameModal.hidden = false;
         document.body.style.overflow = 'hidden';
@@ -805,7 +976,7 @@
         if (!gameModal) return;
         gameModal.hidden = true;
         if (gameFrame) gameFrame.src = 'about:blank';
-        if (!videoModal || videoModal.hidden) document.body.style.overflow = '';
+        if (!anyMediaOpen()) document.body.style.overflow = '';
     }
 
     document.addEventListener('click', (e) => {
@@ -877,6 +1048,7 @@
         if (e.key === 'Escape') {
             closeVideo();
             closeGame();
+            closeWorkflow();
         }
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') closeLightbox();

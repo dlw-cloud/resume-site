@@ -20,9 +20,9 @@
     <meta name="twitter:description" content="电子科学与技术本科生，AI工程实践者，5项权威认证，硬件与AI交叉实践">
     <meta name="twitter:image" content="images/45.jpg">
 
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=theme-mix">
     <link rel="apple-touch-icon" href="images/45.jpg">
-    <link rel="stylesheet" href="css/style.css?v=skill-grad">
+    <link rel="stylesheet" href="css/style.css?v=theme-mix">
 
     <script type="application/ld+json">
     {
@@ -199,6 +199,10 @@
                         <p class="section-subtitle" data-i18n="secProjectsSub">已完成的实战，以及下一阶段要冲击的方向</p>
                     </div>
                 </div>
+                <div class="workflow-cta-wrap" id="workflowCtaWrap">
+                    <p class="workflow-cta-kicker" data-i18n="workflowKicker">大一新生 · 零基础 · 一个人 = 一支 AI 团队</p>
+                    <button type="button" class="workflow-cta" id="openWorkflowBtn" data-i18n="workflowCta" aria-haspopup="dialog" aria-controls="workflowModal">AI驾驭AI，从零搭建AI自动化工作流</button>
+                </div>
                 <div class="project-grid" id="projectsGrid"></div>
             </section>
 
@@ -306,6 +310,19 @@
         </div>
     </div>
 
+    <div class="workflow-modal" id="workflowModal" role="dialog" aria-modal="true" aria-labelledby="workflowModalTitle" hidden>
+        <div class="workflow-modal-panel" role="document">
+            <div class="workflow-modal-bar">
+                <div>
+                    <p class="workflow-modal-eyebrow" data-i18n="workflowKicker">大一新生 · 零基础 · 一个人 = 一支 AI 团队</p>
+                    <h3 id="workflowModalTitle" data-i18n="workflowModalTitle">AI驾驭AI，从零搭建AI自动化工作流</h3>
+                </div>
+                <button type="button" class="workflow-modal-close" id="closeWorkflowBtn" aria-label="关闭" data-i18n-aria="close">×</button>
+            </div>
+            <div class="workflow-modal-scroll" id="workflowModalBody"></div>
+        </div>
+    </div>
+
     <div class="lightbox" id="lightbox" role="dialog" aria-label="证书图片查看" data-i18n-aria="lightboxLabel">
         <button class="lightbox-close" id="lightboxClose" aria-label="关闭" data-i18n-aria="close">&times;</button>
         <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="上一张" data-i18n-aria="prev">&#8249;</button>
@@ -314,6 +331,6 @@
         <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
 
-    <script src="js/main.js?v=honor-star" defer></script>
+    <script src="js/main.js?v=theme-mix" defer></script>
 </body>
 </html>
