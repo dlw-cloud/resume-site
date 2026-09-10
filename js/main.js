@@ -614,13 +614,13 @@
             </section>
             <div class="workflow-shots">
                 <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成你的图；当前默认 images/workflow-architecture.svg -->
-                    <img class="workflow-shot-img" src="images/workflow-architecture.svg" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
+                    <!-- 替换提示：默认 images/workflow-architecture.png -->
+                    <img class="workflow-shot-img" src="images/workflow-architecture.png" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
                     <figcaption>Architecture: Feishu 👉 Hermes 👉 FastAPI 👉 CrewAI 4-core + vision plugin</figcaption>
                 </figure>
                 <figure class="workflow-shot workflow-shot-phone">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成你的图；当前默认 images/feishu-phone.svg -->
-                    <img class="workflow-shot-img" src="images/feishu-phone.svg" alt="Feishu remote-control screenshot on phone">
+                    <!-- 替换提示：默认 images/feishu-phone.png -->
+                    <img class="workflow-shot-img" src="images/feishu-phone.png" alt="Feishu remote-control screenshot on phone">
                     <figcaption>Phone Feishu remote-control screenshot</figcaption>
                 </figure>
             </div>`;
@@ -662,13 +662,13 @@
             </section>
             <div class="workflow-shots">
                 <figure class="workflow-shot">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成你的图；当前默认 images/workflow-architecture.svg -->
-                    <img class="workflow-shot-img" src="images/workflow-architecture.svg" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
+                    <!-- 替换提示：默认 images/workflow-architecture.png -->
+                    <img class="workflow-shot-img" src="images/workflow-architecture.png" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
                     <figcaption>系统架构图：手机飞书 👉 Hermes网关 👉 FastAPI接口 👉 CrewAI 4核心角色 + 视觉外挂</figcaption>
                 </figure>
                 <figure class="workflow-shot workflow-shot-phone">
-                    <!-- 替换提示：把 src="YOUR_IMAGE_URL" 改成你的图；当前默认 images/feishu-phone.svg -->
-                    <img class="workflow-shot-img" src="images/feishu-phone.svg" alt="手机飞书遥控截图">
+                    <!-- 替换提示：默认 images/feishu-phone.png -->
+                    <img class="workflow-shot-img" src="images/feishu-phone.png" alt="手机飞书遥控截图">
                     <figcaption>手机飞书遥控截图</figcaption>
                 </figure>
             </div>`;
