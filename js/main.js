@@ -787,7 +787,7 @@
             const label = stripParens(tx(img.label));
             return `
             <div class="cert-gallery-item" data-index="${idx}" tabindex="0" role="button" aria-label="${label}">
-                <img src="${img.src}" alt="${label}" loading="lazy" />
+                <img src="${img.src}" alt="${label}" decoding="async" />
                 <div class="cert-gallery-label">${label}</div>
             </div>`;
         }).join('');
