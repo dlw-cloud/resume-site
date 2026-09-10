@@ -1459,7 +1459,7 @@
         .lightbox {
             position: fixed;
             inset: 0;
-            z-index: 3000;
+            z-index: 3400;
             background: rgba(0, 0, 0, 0.88);
             display: flex;
             align-items: center;
@@ -2481,6 +2481,15 @@
             border-radius: 14px;
             overflow: hidden;
             background: rgba(15, 23, 42, 0.28);
+            cursor: zoom-in;
+        }
+        .workflow-shot:hover .workflow-shot-img,
+        .workflow-shot:focus-visible .workflow-shot-img {
+            filter: brightness(1.08);
+        }
+        .workflow-shot:focus-visible {
+            outline: 2px solid var(--primary-light);
+            outline-offset: 2px;
         }
         [data-theme="light"] .workflow-shot {
             background: rgba(238, 242, 255, 0.8);

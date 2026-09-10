@@ -616,12 +616,12 @@
                 <figure class="workflow-shot">
                     <!-- 替换提示：默认 images/workflow-architecture.png -->
                     <img class="workflow-shot-img" src="images/workflow-architecture.png" alt="Architecture: Feishu on phone → Hermes gateway → FastAPI → CrewAI 4-core + vision plugin">
-                    <figcaption>Architecture: Feishu 👉 Hermes 👉 FastAPI 👉 CrewAI 4-core + vision plugin</figcaption>
+                    <figcaption>Architecture: Feishu 👉 Hermes 👉 FastAPI 👉 CrewAI 4-core + vision plugin · Click to enlarge</figcaption>
                 </figure>
                 <figure class="workflow-shot workflow-shot-phone">
                     <!-- 替换提示：默认 images/feishu-phone.png -->
                     <img class="workflow-shot-img" src="images/feishu-phone.png" alt="Feishu remote-control screenshot on phone">
-                    <figcaption>Phone Feishu remote-control screenshot</figcaption>
+                    <figcaption>Phone Feishu remote-control screenshot · Click to enlarge</figcaption>
                 </figure>
             </div>`;
         }
@@ -664,14 +664,27 @@
                 <figure class="workflow-shot">
                     <!-- 替换提示：默认 images/workflow-architecture.png -->
                     <img class="workflow-shot-img" src="images/workflow-architecture.png" alt="系统架构图：手机飞书 → Hermes网关 → FastAPI接口 → CrewAI 4核心角色 + 视觉外挂">
-                    <figcaption>系统架构图：手机飞书 👉 Hermes网关 👉 FastAPI接口 👉 CrewAI 4核心角色 + 视觉外挂</figcaption>
+                    <figcaption>系统架构图：手机飞书 👉 Hermes网关 👉 FastAPI接口 👉 CrewAI 4核心角色 + 视觉外挂 · 点击放大</figcaption>
                 </figure>
                 <figure class="workflow-shot workflow-shot-phone">
                     <!-- 替换提示：默认 images/feishu-phone.png -->
                     <img class="workflow-shot-img" src="images/feishu-phone.png" alt="手机飞书遥控截图">
-                    <figcaption>手机飞书遥控截图</figcaption>
+                    <figcaption>手机飞书遥控截图 · 点击放大</figcaption>
                 </figure>
             </div>`;
+    }
+
+    function workflowShots() {
+        if (lang === 'en') {
+            return [
+                { src: 'images/workflow-architecture.png', label: 'Architecture: Feishu → Hermes → FastAPI → CrewAI 4-core + vision' },
+                { src: 'images/feishu-phone.png', label: 'Feishu remote-control screenshot' },
+            ];
+        }
+        return [
+            { src: 'images/workflow-architecture.png', label: '系统架构图：手机飞书 → Hermes → FastAPI → CrewAI 4核心 + 视觉外挂' },
+            { src: 'images/feishu-phone.png', label: '手机飞书遥控截图' },
+        ];
     }
 
     function bindWorkflowShotFallbacks(root) {
@@ -680,6 +693,21 @@
             img.addEventListener('error', function onErr() {
                 this.removeEventListener('error', onErr);
                 this.classList.add('is-empty');
+            });
+        });
+        root.querySelectorAll('.workflow-shot').forEach((fig, idx) => {
+            fig.setAttribute('tabindex', '0');
+            fig.setAttribute('role', 'button');
+            fig.setAttribute('aria-label', (fig.querySelector('figcaption') || {}).textContent || '');
+            fig.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(idx, workflowShots());
+            });
+            fig.addEventListener('keydown', (e) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox(idx, workflowShots());
             });
         });
     }
@@ -1001,14 +1029,17 @@
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCounter = document.getElementById('lightboxCounter');
     let currentLightboxIndex = 0;
+    let lightboxItems = resume.certImages;
 
     function updateLightbox() {
-        const img = resume.certImages[currentLightboxIndex];
+        const img = lightboxItems[currentLightboxIndex];
+        if (!img) return;
         lightboxImg.src = img.src;
         lightboxImg.alt = tx(img.label);
-        lightboxCounter.textContent = (currentLightboxIndex + 1) + ' / ' + resume.certImages.length;
+        lightboxCounter.textContent = (currentLightboxIndex + 1) + ' / ' + lightboxItems.length;
     }
-    function openLightbox(index) {
+    function openLightbox(index, items) {
+        lightboxItems = items || resume.certImages;
         currentLightboxIndex = index;
         updateLightbox();
         lightbox.classList.add('open');
@@ -1016,48 +1047,52 @@
     }
     function closeLightbox() {
         lightbox.classList.remove('open');
-        document.body.style.overflow = '';
+        if (!anyMediaOpen()) document.body.style.overflow = '';
     }
     function bindGallery() {
         const gallery = document.getElementById('certGallery');
         gallery.onclick = (e) => {
             const item = e.target.closest('.cert-gallery-item');
-            if (item) openLightbox(Number(item.dataset.index));
+            if (item) openLightbox(Number(item.dataset.index), resume.certImages);
         };
         gallery.onkeydown = (e) => {
             if (e.key !== 'Enter' && e.key !== ' ') return;
             const item = e.target.closest('.cert-gallery-item');
             if (!item) return;
             e.preventDefault();
-            openLightbox(Number(item.dataset.index));
+            openLightbox(Number(item.dataset.index), resume.certImages);
         };
     }
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     document.getElementById('lightboxPrev').addEventListener('click', (e) => {
         e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex - 1 + resume.certImages.length) % resume.certImages.length;
+        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
         updateLightbox();
     });
     document.getElementById('lightboxNext').addEventListener('click', (e) => {
         e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex + 1) % resume.certImages.length;
+        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxItems.length;
         updateLightbox();
     });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+            if (lightbox.classList.contains('open')) {
+                closeLightbox();
+                return;
+            }
             closeVideo();
             closeGame();
             closeWorkflow();
+            return;
         }
         if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowLeft') {
-            currentLightboxIndex = (currentLightboxIndex - 1 + resume.certImages.length) % resume.certImages.length;
+            currentLightboxIndex = (currentLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
             updateLightbox();
         }
         if (e.key === 'ArrowRight') {
-            currentLightboxIndex = (currentLightboxIndex + 1) % resume.certImages.length;
+            currentLightboxIndex = (currentLightboxIndex + 1) % lightboxItems.length;
             updateLightbox();
         }
     });
