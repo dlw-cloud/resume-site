@@ -176,7 +176,7 @@
             { number: '5', unit: { zh: '项', en: '' }, label: { zh: '权威 AI 认证\n华为 / 阿里云 / 讯飞 / ILO / Datawhale', en: 'AI credentials\nHuawei / Aliyun / iFLYTEK / ILO / Datawhale' } },
             { number: '87.5', unit: '%', label: { zh: 'PPT 制作效率提升\n5 小时 → 40 分钟', en: 'PPT workflow speedup\n5h → 40min' } },
             { number: '30', unit: '%', label: { zh: '硬件开发周期缩短\n较往届平均', en: 'Hardware cycle shortened\nvs. previous teams' } },
-            { number: '2', unit: { zh: '个月', en: ' mo' }, label: { zh: '从零走到 AI 全线\n5 项认证 + 3 个项目', en: 'Zero to AI stack\n5 certs + 3 projects' } },
+            { number: '2', unit: { zh: '个月', en: ' mo' }, label: { zh: '从零走到全栈开发\n5 项认证 + 3 个项目', en: 'Zero to full-stack\n5 certs + 3 projects' } },
             { number: '4', unit: { zh: '年', en: ' yrs' }, label: { zh: '连续物理课代表\n初中至高中优秀称号', en: 'Physics class rep\n4 years, excellent title' } },
         ],
         journey: [
@@ -1156,7 +1156,26 @@
         spotlightTimeout = setTimeout(() => spotlight.classList.remove('active'), 3000);
     });
 
+    function playIntro() {
+        const splash = document.getElementById('introSplash');
+        if (!splash) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            splash.remove();
+            return;
+        }
+        let closed = false;
+        const dismiss = () => {
+            if (closed) return;
+            closed = true;
+            splash.classList.add('is-leaving');
+            window.setTimeout(() => splash.remove(), 800);
+        };
+        splash.addEventListener('click', dismiss);
+        window.setTimeout(dismiss, 2600);
+    }
+
     setupAvatarFallback();
     renderAll();
+    playIntro();
     markActiveNav();
 })();
