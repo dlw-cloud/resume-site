@@ -23,6 +23,7 @@
             navEducation: '教育',
             navCerts: '证书',
             navInterests: '兴趣',
+            navContact: '联系',
             copyEmail: '复制邮箱',
             copyWechat: '复制微信',
             copyQq: '复制 QQ',
@@ -99,6 +100,7 @@
             navEducation: 'Education',
             navCerts: 'Certificates',
             navInterests: 'Interests',
+            navContact: 'Contact',
             copyEmail: 'Copy email',
             copyWechat: 'Copy WeChat',
             copyQq: 'Copy QQ',
@@ -414,6 +416,7 @@
             { name: { zh: 'Datawhale AI认证', en: 'Datawhale AI' }, org: 'Datawhale', date: '2025', icon: 'D' },
         ],
         awards: [
+            { name: { zh: '国际先进机器人及仿真技术大赛 国家级三等奖', en: 'Intl. Advanced Robotics & Simulation Technology Competition — National 3rd Prize' }, org: { zh: '队长 · 指导教师 郭丁丁', en: 'Team lead · Advisor: Guo Dingding' }, date: { zh: '2026 年 11 月', en: 'Nov 2026' } },
             { name: { zh: '叶圣陶杯全国中学生新作文大赛二等奖', en: 'Ye Shengtao National Writing Contest, 2nd prize' }, org: { zh: '中国当代文学研究会', en: 'China Contemporary Literature Society' }, date: { zh: '高中', en: 'High school' } },
             { name: { zh: '优秀课代表', en: 'Excellent class representative' }, org: { zh: '佳木斯市第二十中学 / 第一中学', en: 'Jiamusi No.20 / No.1' }, date: { zh: '初中至高中', en: '2019–2026' } },
         ],
@@ -435,6 +438,7 @@
             { src: 'images/15.jpg', label: { zh: '证书 15', en: 'Certificate 15' } },
             { src: 'images/16.jpg', label: { zh: '证书 16', en: 'Certificate 16' } },
             { src: 'images/17.jpg', label: { zh: '证书 17', en: 'Certificate 17' } },
+            { src: 'images/award-robotics-2026.jpg', label: { zh: '国际先进机器人及仿真技术大赛 国赛三等奖获奖名单', en: 'IARSTS national 3rd prize — winners list' } },
         ],
         interests: [
             {
@@ -863,6 +867,7 @@
         lang = next;
         try { localStorage.setItem('resume-lang', lang); } catch (e) {}
         renderAll();
+        refreshLeadWords();
     }
 
     function getSystemTheme() {
@@ -899,10 +904,14 @@
         const el = document.getElementById(id);
         if (el) el.addEventListener('click', () => copyText(resume.wechat, t('copyWechatToast')));
     });
-    const phoneBtn = document.getElementById('copyPhoneBtn');
-    if (phoneBtn) phoneBtn.addEventListener('click', () => copyText(resume.phone, t('copyPhoneToast')));
-    const qqBtn = document.getElementById('copyQqBtn');
-    if (qqBtn) qqBtn.addEventListener('click', () => copyText(resume.qq, t('copyQqToast')));
+    ['copyPhoneBtn', 'copyPhoneBtnHero'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', () => copyText(resume.phone, t('copyPhoneToast')));
+    });
+    ['copyQqBtn', 'copyQqBtnHero'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', () => copyText(resume.qq, t('copyQqToast')));
+    });
 
     [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')].forEach((btn) => {
         if (btn) btn.addEventListener('click', toggleTheme);
@@ -1098,19 +1107,48 @@
     });
 
     function markActiveNav() {
-        const links = document.querySelectorAll('.sidebar-link');
+        const links = Array.prototype.slice.call(document.querySelectorAll('.header-link'));
         const sections = ['about', 'highlights', 'journey', 'projects', 'works', 'skills', 'education', 'certifications', 'interests', 'contact']
             .map((id) => document.getElementById(id))
             .filter(Boolean);
         let current = 'about';
         sections.forEach((sec) => {
-            if (sec.getBoundingClientRect().top <= 120) current = sec.id;
+            if (sec.getBoundingClientRect().top <= 140) current = sec.id;
         });
+        // the last chapter is shorter than the viewport, so its top never crosses
+        // the threshold — pin it active once the page is scrolled to the end
+        const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 4;
+        if (atBottom && sections.length) current = sections[sections.length - 1].id;
+        let activeLink = null;
         links.forEach((link) => {
-            link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+            const isActive = link.getAttribute('href') === '#' + current;
+            link.classList.toggle('is-active', isActive);
+            if (isActive) activeLink = link;
         });
+        moveUnderline(activeLink);
     }
+
+    // Slide the header underline to sit beneath the active chapter link.
+    function moveUnderline(link) {
+        const bar = document.getElementById('headerUnderline');
+        const nav = link && link.parentElement;
+        if (!bar || !link || !nav) {
+            if (bar) bar.style.opacity = '0';
+            return;
+        }
+        if (window.matchMedia('(max-width: 900px)').matches) {
+            bar.style.opacity = '0';
+            return;
+        }
+        const linkBox = link.getBoundingClientRect();
+        const navBox = nav.getBoundingClientRect();
+        bar.style.left = (linkBox.left - navBox.left + nav.scrollLeft) + 'px';
+        bar.style.width = linkBox.width + 'px';
+        bar.style.opacity = '1';
+    }
+
     window.addEventListener('scroll', markActiveNav, { passive: true });
+    window.addEventListener('resize', markActiveNav);
 
     function setupAvatarFallback() {
         ['sidebarAvatar', 'heroAvatar'].forEach((id) => {
@@ -1133,6 +1171,59 @@
         });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    /* ---- scroll word-reveal ----
+       Lead paragraphs are split into clause-sized chunks that rise into place
+       with a per-chunk stagger. Chunks are inline-block, so the original
+       separators are emitted as raw text nodes to keep line breaking intact. */
+    const leadObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-inview');
+                leadObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.25 });
+
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function buildLeadWords() {
+        document.querySelectorAll('.section-lead').forEach((el) => {
+            if (el.dataset.wordsReady === '1') return;
+            const parts = el.textContent.split(/([\s，。、；：！？——…·]+)/);
+            let html = '';
+            let index = 0;
+            parts.forEach((part, i) => {
+                if (!part) return;
+                if (i % 2 === 0) {
+                    html += '<span class="word" style="--word-index:' + index + '">' + escapeHtml(part) + '</span>';
+                    index += 1;
+                } else {
+                    html += escapeHtml(part);
+                }
+            });
+            el.innerHTML = html;
+            el.dataset.wordsReady = '1';
+            leadObserver.observe(el);
+        });
+    }
+
+    // Language switching rewrites textContent, which drops the chunk spans,
+    // so rebuild them and let the observer re-fire for anything already on screen.
+    function refreshLeadWords() {
+        document.querySelectorAll('.section-lead').forEach((el) => {
+            el.dataset.wordsReady = '0';
+            el.classList.remove('is-inview');
+            leadObserver.unobserve(el);
+        });
+        buildLeadWords();
+    }
 
     const hero = document.getElementById('about');
     if (hero) {
@@ -1176,6 +1267,9 @@
 
     setupAvatarFallback();
     renderAll();
+    // must follow renderAll(): applyI18n rewrites textContent and would drop the
+    // chunk spans otherwise
+    refreshLeadWords();
     playIntro();
     markActiveNav();
 })();
